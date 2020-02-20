@@ -6,7 +6,11 @@ namespace hashcode
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Program started");
+            Google g = new Google();
+            g.start();
+
+            Console.ReadKey();
         }
     }
 }
