@@ -15,7 +15,7 @@ namespace hashcode
         private int bCount;
         private int lCount;
         private int dCount;
-        private List<int> ids;
+        private List<int> idPoints;
 
         private Dictionary<int, List<int>> sLibs = new Dictionary<int, List<int>>();
 
@@ -24,13 +24,13 @@ namespace hashcode
             Console.WriteLine("Starting");
             //readInput("E:\\google\\in\\a_example.txt");
             //readInput("E:\\google\\in\\b_read_on.txt");
-            //readInput("E:\\google\\in\\c_incunabula.txt");
+            readInput("E:\\google\\in\\c_incunabula.txt");
             //readInput("E:\\google\\in\\d_tough_choices.txt");
             //readInput("E:\\google\\in\\e_so_many_books.txt");
-            readInput("E:\\google\\in\\f_libraries_of_the_world.txt");
+            //readInput("E:\\google\\in\\f_libraries_of_the_world.txt");
 
             //Logic
-            logicOneToOneMapping();
+            logicOneToOneWithFirstBig();
 
             //Output
             createOutput("E:\\google\\out\\a_example.txt", sLibs);
@@ -48,9 +48,14 @@ namespace hashcode
             }
         }
 
-
-
-
+        private void logicOneToOneWithFirstBig()
+        {
+            foreach (Library lib in libs.OrderBy(it => it.proDays).OrderBy(it => it.bDay))
+            {
+                sLibs.Add(lib.libId, lib.ids.OrderBy(it => idPoints[it]).ToList());
+                Console.WriteLine("Library: " + lib.libId);
+            }
+        }
 
         private void readInput(string path)
         {
@@ -65,12 +70,12 @@ namespace hashcode
             dCount = Convert.ToInt32(lines[0].Split(' ')[2]);
 
             //Get score points
-            ids = lines[1].Split(' ').Select(Int32.Parse).ToList() ;
+            idPoints = lines[1].Split(' ').Select(Int32.Parse).ToList() ;
 
             int libCounter = 0;
             for(int i = 2; i < lines.Length; i = i + 2)
             {
-                libs[libCounter] = new Library(Convert.ToInt32(lines[i].Split(' ')[0]), Convert.ToInt32(lines[i].Split(' ')[1]), Convert.ToInt32(lines[i].Split(' ')[2]), lines[i + 1].Split(' ').Select(Int32.Parse).ToList());
+                libs[libCounter] = new Library(libCounter, Convert.ToInt32(lines[i].Split(' ')[0]), Convert.ToInt32(lines[i].Split(' ')[1]), Convert.ToInt32(lines[i].Split(' ')[2]), lines[i + 1].Split(' ').Select(Int32.Parse).ToList());
                 libCounter++;
             }
 

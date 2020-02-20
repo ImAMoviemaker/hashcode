@@ -13,6 +13,7 @@ namespace hashcode
         public int proDays;
         public int bDay;
         public List<int> ids;
+        public int libId;
 
         /// <summary>
         /// Create Library
@@ -21,8 +22,9 @@ namespace hashcode
         /// <param name="proDays"></param>
         /// <param name="bDay"></param>
         /// <param name="id"></param>
-        public Library(int bLib, int proDays, int bDay, List<int> ids)
+        public Library(int libId, int bLib, int proDays, int bDay, List<int> ids)
         {
+            this.libId = libId;
             this.bLib = bLib;
             this.proDays = proDays;
             this.bDay = bDay;
